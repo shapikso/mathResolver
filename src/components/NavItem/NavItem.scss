@@ -1,0 +1,10 @@
+@import 'src/styles/colors';
+.navItem {
+    display: flex;
+    color: $grey_color;
+    gap: 8px;
+    font-size: 13px;
+    &--active {
+        color: $white_color;
+    }
+};

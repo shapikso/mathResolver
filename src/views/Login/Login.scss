@@ -1,0 +1,56 @@
+@import 'src/styles/colors';
+
+.LoginForm {
+    margin: 255px auto 16px;
+    max-width: 480px;
+    background: $white_color;
+    border: 1px solid $border_form_color;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    gap: 30px;
+    button {
+        margin-top: -14px;
+    }
+    &__divider {
+        display: flex;
+        align-items: center;
+        margin-top: -9px;
+        margin-bottom: 3px;
+        &__line {
+            width: 100%;
+            border-bottom: 1px solid $border_form_color;
+        }
+        &__text {
+            font-size: 13px;
+            color: $grey_color;
+            margin: auto 8px;
+        }
+    }
+    &__inputWrapper {
+        display: flex;
+        gap: 6px;
+        flex-direction: column;
+    };
+
+    &__textWrapper {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        font-size: 13px;
+        a {
+            text-decoration: none;
+            color: $primary_color;
+        }
+    }
+    &__iconWrapper {
+        position: absolute;
+        width: 13px;
+        height: 13px;
+        bottom: 27px;
+        right: 13px;
+        cursor: pointer;
+    }
+};

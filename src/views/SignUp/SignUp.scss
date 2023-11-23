@@ -1,0 +1,60 @@
+@import 'src/styles/colors';
+
+.form {
+    margin: 139px auto 16px;
+    max-width: 480px;
+    background: $white_color;
+    border: 1px solid $border_form_color;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    gap: 32px;
+
+    & > button {
+        margin-top: -16px;
+    }
+
+    &__inputWrapper {
+        display: flex;
+        gap: 6px;
+        flex-direction: column;
+    };
+
+    &__titleWrapper {
+        display: flex;
+        justify-content: space-between;
+        &__avatar {
+            max-width: 48px;
+            max-height: 48px;
+            width: 100%;
+            margin: 0;
+            cursor: pointer;
+            border: 1px solid $border_form_color;
+            background: $background_primary_color;
+            border-radius: 50%;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+    }
+    &__textWrapper {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        font-size: 13px;
+        a {
+            text-decoration: none;
+            color: $primary_color;
+        }
+    }
+    &__iconWrapper {
+        position: absolute;
+        width: 13px;
+        height: 13px;
+        bottom: 27px;
+        right: 13px;
+        cursor: pointer;
+    }
+};

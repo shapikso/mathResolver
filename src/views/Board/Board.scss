@@ -1,0 +1,14 @@
+@import 'src/styles/colors';
+
+.board {
+  &__topPart {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 40px;
+    &__buttonWrapper {
+      max-width: 165px;
+      width: 100%;
+      margin-top: 2px;
+    }
+  }
+}

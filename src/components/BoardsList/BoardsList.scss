@@ -1,0 +1,77 @@
+@import "src/styles/colors";
+@import "src/styles/styles";
+
+.boardList {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.singleBoard {
+  display: flex;
+  flex-direction: column;
+  max-width: 362px;
+  width: 100%;
+  background: $white_color;
+  border: 1px solid $border_form_color;
+  border-radius: 20px;
+
+  &__infoWrapper {
+    display: flex;
+    gap: 10px;
+    margin: 20px;
+    height: 113px;
+    &__imagePart {
+      max-height: 48px;
+      img {
+        width: 48px;
+        height: 48px;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+    &__infoPart {
+      display: flex;
+      flex-direction: column;
+      font-size: 13px;
+      &__title {
+        color: $text_headline_color;
+        //margin-top: 4px;
+      }
+      &__description {
+        margin-top: 4px;
+        color: $grey_color;
+        overflow-wrap: break-word;
+        @include overflowLinesEllipsis(3)
+      }
+      &__createdBy {
+        margin-top: 12px;
+        font-size: 11px;
+        color: $grey_color;
+      }
+    }
+  }
+  &__buttonWrapper {
+    margin-top: -2px;
+    display: flex;
+    padding: 0 21px 0 16px;
+    height: 51px;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid $border_form_color;
+    button {
+      border: none;
+    }
+    &__line {
+      height: 100%;
+      border-right: 1px solid $border_form_color;
+      margin-left: -7px;
+    }
+  }
+}
+.boardButton {
+  align-items: center;
+  height: 51px;
+  width: 50%;
+}

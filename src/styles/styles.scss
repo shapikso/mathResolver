@@ -1,0 +1,22 @@
+@import './colors';
+@mixin overflowLinesEllipsis($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+@mixin form {
+  margin: 30px 0;
+  max-width: 406px;
+  background: $white_color;
+  border: 1px solid $border_form_color;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 32px;
+  button{
+    margin-top: -16px;
+    max-height: 40px;
+  }
+}

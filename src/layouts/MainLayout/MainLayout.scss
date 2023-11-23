@@ -1,0 +1,12 @@
+@import 'src/styles/colors';
+
+.activeArea {
+    display: grid;
+    grid-template-columns: max(214px) 1fr;
+    min-height: calc(100vh - 70px);
+    &__main {
+        width: 100%;
+        padding: 30px 40px 30px 40px;
+        position: relative;
+    }
+}
