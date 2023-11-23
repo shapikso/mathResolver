@@ -14,7 +14,7 @@ function App() {
         <Routes>
             <Route element={<MainLayout />}>
                 <Route path={LINKS.BOARD_LINK} element={<Board/>}/>
-                <Route path={LINKS.INTEGRAL_LINK} element={<Integral/>}/>
+                <Route path={'/'} element={<Integral/>}/>
             </Route>
             <Route path={LINKS.SIGN_UP_LINK} element={<SingUp/>} />
             <Route path={LINKS.LOGIN_LINK} element={<Login/>} />

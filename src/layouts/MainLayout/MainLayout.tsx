@@ -22,4 +22,4 @@ const MainLayout = () => {
     );
 };
 
-export default withRedirectIfNotLoginIn(MainLayout);
+export default MainLayout;
