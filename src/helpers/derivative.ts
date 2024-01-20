@@ -36,5 +36,5 @@ export const isResultRight = (mainExpression: string,result: string,dx: number,x
     // const res1 = math.parse(`log(10,e)`).compile().evaluate();
     // console.log(res1);
 
-    return res <= 0.005;
+    return res <= 0.001;
 };
