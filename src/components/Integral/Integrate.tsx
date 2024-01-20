@@ -9,6 +9,7 @@ import { MathComponent } from "mathjax-react";
 
 import {generateExpression} from "../../helpers/generateDerivativeEasy";
 import {create, all} from 'mathjs';
+import {convertToUaFormulas} from "../../helpers/convertToUaformulas";
 
 const config = { };
 const math = create(all, config);
@@ -24,7 +25,7 @@ const Integrate = ({mainExpression}: TProps) => {
     const mainTest = '1/sqrt(x)';
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => setResult(e.target.value);
     const handleClick = () => {
-        const isResult = isResultRight(mainExpression.main, result,1,2);
+        const isResult = isResultRight(mainExpression.main, convertToUaFormulas(result),1,2);
         toast.success(isResult ? 'ваш ответ правильный' : 'ваш ответ не правильный');
     };
 

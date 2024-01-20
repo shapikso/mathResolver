@@ -9,6 +9,7 @@ import { MathComponent } from "mathjax-react";
 
 import {generateExpression} from "../../helpers/generateDerivativeEasy";
 import {create, all} from 'mathjs';
+import {convertToUaFormulas} from "../../helpers/convertToUaformulas";
 
 const config = { };
 const math = create(all, config);
@@ -21,7 +22,7 @@ const Derivative = ({mainExpression}: TProps) => {
     const [result, setResult] = useState('2x + cos(x)');
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => setResult(e.target.value);
     const handleClick = () => {
-        const isResult = isResultRight(mainExpression.main,result,0.001,[1,2]);
+        const isResult = isResultRight(mainExpression.main, convertToUaFormulas(result),0.001,[1,2]);
         toast.success(isResult ? 'ваш ответ правильный' : 'ваш ответ не правильный');
     };
 
