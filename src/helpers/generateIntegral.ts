@@ -1,4 +1,4 @@
-import {randomInteger} from "./helpers";
+import {randomInteger, randomIntegerExclude} from "./helpers";
 import {create, all} from 'mathjs';
 
 const config = { };
@@ -8,8 +8,8 @@ type GeometricType = {
     [key: number]: string
 }
 
-type LogType = {
-    [key: number | string]: string
+export type DomainType = {
+    [key: number]: [number, number]
 }
 
 class Expression {
@@ -54,24 +54,15 @@ class Expression {
     };
 
     getGeometricTypeNew: GeometricType = {
-        1: 'sin',
-        2: 'cos',
-        3: 'atan',
-        4: 'acot',
-        5: 'log',
+        1: 'atan',
+        2: 'acot',
+        3: 'log',
     };
 
     getGeometricNormalNew: GeometricType = {
-        1: 'sin',
-        2: 'cos',
-        3: 'arctan',
-        4: 'arcctg',
-        5: 'ln',
-    };
-
-    sqrSigns: LogType = {
-        0: '+',
-        1: '-',
+        1: 'arctan',
+        2: 'arcctg',
+        3: 'ln',
     };
 
     constructor() {
@@ -85,7 +76,7 @@ class Expression {
         this.functionSecondValueThird = randomInteger(2,5);
 
         this.functionThirdValueFirst = randomInteger(2,5);
-        this.functionThirdValueSecond = randomInteger(2,5);
+        this.functionThirdValueSecond = randomIntegerExclude(2,5, this.functionThirdValueFirst);
         this.functionThirdRandom = randomInteger(0,1, true);
 
         this.functionFourthPow = randomInteger(2,6);
@@ -101,7 +92,7 @@ class Expression {
         this.functionSeventhValueThird = randomInteger(-2,2);
         this.functionSeventhValueFourth = randomInteger(-4,4);
 
-        this.functionEightGeometricType = randomInteger(1,5);
+        this.functionEightGeometricType = randomInteger(1,3);
         this.functionEightValuePow = randomInteger(2,6);
     }
 
@@ -112,10 +103,10 @@ class Expression {
             ? `${this.functionThirdValueSecond}^x`
             : `${this.functionThirdValueFirst}^x`
         })`,
-        4: `x^${this.functionFourthPow-1}*(x^${this.functionFourthPow} + ${this.functionFourthValueFirst})^(1/${this.functionFourthSqrtPow})`,
-        5: `(x^${this.functionFourthPow-1})/sqrt(x^${this.functionFourthPow} + ${this.functionFourthValueFirst})`,
-        6: `(${math.derivative(`x^${this.functionSixthPow} + ${this.functionFourthValueFirst}*x^${this.functionSixthPow-1} + ${this.functionSixthValueFirst}`, 'x').toString()})*${this.getGeometricType[this.functionSixthGeometricType]}(x^${this.functionSixthPow} + ${this.functionFourthValueFirst}*x^${this.functionSixthPow-1} + ${this.functionSixthValueFirst})`,
-        7: `(${this.functionSeventhValueFirst}*x + ${this.functionSeventhValueSecond})/(${this.functionSeventhValueThird}*x + ${this.functionSeventhValueFourth})`,
+        4: `x^${this.functionFourthPow-1}*(x^${this.functionFourthPow} +${this.functionFourthValueFirst})^(1/${this.functionFourthSqrtPow})`,
+        5: `(x^${this.functionFourthPow-1})/sqrt(x^${this.functionFourthPow} +${this.functionFourthValueFirst})`,
+        6: `(${math.derivative(`x^${this.functionSixthPow} +${this.functionFourthValueFirst}*x^${this.functionSixthPow-1} +${this.functionSixthValueFirst}`, 'x').toString()})*${this.getGeometricType[this.functionSixthGeometricType]}(x^${this.functionSixthPow} +${this.functionFourthValueFirst}*x^${this.functionSixthPow-1} +${this.functionSixthValueFirst})`,
+        7: `(${this.functionSeventhValueFirst}*x +${this.functionSeventhValueSecond})/(${this.functionSeventhValueThird}*x+${this.functionSeventhValueFourth})`,
         8: `x^${this.functionEightValuePow}*${this.getGeometricTypeNew[this.functionEightGeometricType]}(x)`,
     });
 
@@ -132,14 +123,26 @@ class Expression {
         7: `\\frac{${this.functionSeventhValueFirst === 1 || this.functionSeventhValueFirst === -1 ? `${this.functionSeventhValueFirst}`.replace('1','') : this.functionSeventhValueFirst}x+${this.functionSeventhValueSecond}}{${this.functionSeventhValueThird === 1 || this.functionSeventhValueThird === -1 ? `${this.functionSeventhValueThird}`.replace('1','') : this.functionSeventhValueThird}x+${this.functionSeventhValueFourth}}`,
         8: `x^${this.functionEightValuePow}${this.getGeometricNormalNew[this.functionEightGeometricType]}(x)`,
     });
+
+    generateFunctionDomain = (): DomainType  => ({
+        1: [0, Infinity],
+        2: [0, Infinity],
+        3: [-Infinity, Infinity],
+        4: [math.parse(`(${Math.abs(this.functionFourthValueFirst)})^(1/${this.functionFourthPow})`).compile().evaluate({}), Infinity],
+        5: [math.parse(`(${Math.abs(this.functionFourthValueFirst)})^(1/${this.functionFourthPow})`).compile().evaluate({}), Infinity],
+        6: [-Infinity, Infinity],
+        7: [math.parse(`(-1 * ${this.functionSeventhValueFourth})/(${this.functionSeventhValueThird})`).compile().evaluate({}), Infinity],
+        8: [0, Infinity],
+    });
 }
 
 
-export const generateExpression = (): {main: string, mathjax: string} => {
+export const generateExpression = (): { mathjax: string; main: string; functionDomain: [number, number] } => {
     const expression = new Expression();
     const A1 = randomInteger(1,8);
     return {
         main :`${expression.getExpression()[A1]}`.replaceAll('+-','-'),
-        mathjax: `\\int_a^b${expression.getExpressionForMathjax()[A1]},dx`.replaceAll('+-','-')
+        mathjax: `\\int_a^b${expression.getExpressionForMathjax()[A1]},dx`.replaceAll('+-','-'),
+        functionDomain: expression.generateFunctionDomain()[A1],
     };
 };

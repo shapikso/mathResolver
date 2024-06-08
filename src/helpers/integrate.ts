@@ -9,9 +9,8 @@ export const isResultRight = (mainFunc: string, resultFunc: string ,startPoint: 
     const simpsonResult = simpsonMethod(startPoint, endPoint, mainFunc);
 
     const newtonLeibnizResult = newtonLeibnizMethod(resultFunc, startPoint, endPoint);
-    console.log(simpsonResult, 'simpson');
+    console.log(simpsonResult, 'newtonLeibniz');
     console.log(newtonLeibnizResult, 'newtonLeibniz');
     const result = math.parse(`(${simpsonResult} - ${newtonLeibnizResult})/2`).compile().evaluate();
-    console.log(result);
-    return result <= 0.001;
+    return Math.abs(result) <= 0.001;
 };

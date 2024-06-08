@@ -10,3 +10,9 @@ export const randomInteger = (min: number, max: number, withZero = false): numbe
     const result = Math.round(rand);
     return !withZero && result === 0 ? randomInteger(min,max) : result;
 };
+
+export const randomIntegerExclude = (min: number, max: number, excludedNumber: number): number => {
+    let rand = min - 0.5 + Math.random() * (max - min + 1);
+    const result = Math.round(rand);
+    return result === excludedNumber ? randomIntegerExclude(min,max, excludedNumber) : result;
+};
