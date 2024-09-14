@@ -125,14 +125,14 @@ class Expression {
     });
 
     generateFunctionDomain = (): DomainType  => ({
-        1: [0, Infinity],
-        2: [0, Infinity],
-        3: [-Infinity, Infinity],
+        1: [1, Infinity],
+        2: [1, Infinity],
+        3: [1, Infinity],
         4: [math.parse(`(${Math.abs(this.functionFourthValueFirst)})^(1/${this.functionFourthPow})`).compile().evaluate({}), Infinity],
         5: [math.parse(`(${Math.abs(this.functionFourthValueFirst)})^(1/${this.functionFourthPow})`).compile().evaluate({}), Infinity],
-        6: [-Infinity, Infinity],
+        6: [1, Infinity],
         7: [math.parse(`(-1 * ${this.functionSeventhValueFourth})/(${this.functionSeventhValueThird})`).compile().evaluate({}), Infinity],
-        8: [0, Infinity],
+        8: [1, Infinity],
     });
 }
 
@@ -140,6 +140,7 @@ class Expression {
 export const generateExpression = (): { mathjax: string; main: string; functionDomain: [number, number] } => {
     const expression = new Expression();
     const A1 = randomInteger(1,8);
+    console.log(A1);
     return {
         main :`${expression.getExpression()[A1]}`.replaceAll('+-','-'),
         mathjax: `\\int_a^b${expression.getExpressionForMathjax()[A1]},dx`.replaceAll('+-','-'),

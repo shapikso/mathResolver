@@ -10,5 +10,8 @@ const func = (mainFunc: string, x: number) => {
 export const newtonLeibnizMethod = (mainFunc: string, startPoint: number, endPoint: number) => {
     const ya = func(mainFunc, startPoint);
     const yb = func(mainFunc, endPoint);
-    return math.parse(`${yb} - ${ya}`).compile().evaluate();
+
+    const realA = ya.im !== undefined ? ya.im : ya;
+    const realB = yb.im !== undefined ? yb.im : yb;
+    return math.parse(`${realB} - ${realA}`).compile().evaluate();
 };

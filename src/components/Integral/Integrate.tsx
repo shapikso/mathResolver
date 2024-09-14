@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState, useEffect} from 'react';
+import React, {ChangeEvent, useState, useEffect, useRef} from 'react';
 import './Derivative.scss';
 import Input from "../common/Input/Input";
 import {buttonSize, inputSize} from "../types/types";
@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { MathComponent } from "mathjax-react";
 import {create, all} from 'mathjs';
 import { convertToUaFormulas } from "../../helpers/convertToUaformulas";
+import Calculator from "../Calculator/Calculator";
 
 const config = { };
 const math = create(all, config);
@@ -19,6 +20,7 @@ type TProps = {
 const Integrate = ({mainExpression}: TProps) => {
     const [result, setResult] = useState('2sqrt(x)');
     const [mathJaxResult, setMathJaxResult] = useState('2sqrt(x)');
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const mainTest = '1/sqrt(x)';
 
@@ -30,6 +32,26 @@ const Integrate = ({mainExpression}: TProps) => {
     const handleClick = () => {
         const isResult = isResultRight(mainExpression.main, convertToUaFormulas(result), startOFRange,endRangeForResult);
         toast.success(isResult ? 'ваш ответ правильный' : 'ваш ответ не правильный');
+    };
+
+    const insertTextAtCursor = (text: string) => {
+        if (!inputRef) return;
+        const input = (inputRef as React.MutableRefObject<HTMLInputElement>).current;
+        if (!input) return;
+        const start = input.selectionStart;
+        const end = input.selectionEnd;
+
+        if (start === null || end === null) return;
+
+        const before = result.slice(0, start);
+        const after = result.slice(end);
+
+        const newValue = before + text + after;
+        setResult(newValue);
+
+        setTimeout(() => {
+            input.setSelectionRange(start + text.length, start + text.length);
+        }, 0);
     };
 
     useEffect(() => {
@@ -47,10 +69,10 @@ const Integrate = ({mainExpression}: TProps) => {
     return (
         <div className="derivativeWrapper">
             <div className="derivativeWrapper__derivativeExpression"><MathComponent tex={String.raw`${mainExpression.mathjax}`} /></div>
-            <Input value={result} size={inputSize.large} onChange={handleChange}/>
+            <Input ref={inputRef} value={result} size={inputSize.large} onChange={handleChange}/>
             <Button size={buttonSize.large} onClick={handleClick}>Submit</Button>
             <div className="derivativeWrapper__derivativeExpression"><MathComponent tex={mathJaxResult} /></div>
-            <div className="derivativeWrapper__derivativeExpression">{}</div>
+            <Calculator setValue={insertTextAtCursor}/>
         </div>
     );
 };
