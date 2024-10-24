@@ -8,12 +8,14 @@ import MainLayout from "./layouts/MainLayout/MainLayout";
 import Board from "./views/Board/Board";
 import CreateBoard from './views/CreateBoard/CreateBoard';
 import Integral from "./components/Integral/Integral";
+import DerivativePageWithExpressions from "./views/Derivative/Derivative";
 
 function App() {
     return (
         <Routes>
             <Route element={<MainLayout />}>
                 <Route path={LINKS.BOARD_LINK} element={<Board/>}/>
+                <Route path={LINKS.DERIVATIVE_LINK} element={<DerivativePageWithExpressions/>}/>
                 <Route path={'/'} element={<Integral/>}/>
             </Route>
             <Route path={LINKS.SIGN_UP_LINK} element={<SingUp/>} />

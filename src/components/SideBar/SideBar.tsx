@@ -12,8 +12,9 @@ const SideBar = ({isSideBarShow}:Props) => {
     return (
         <div className={`sideBar ${ isSideBarShow ? 'sideBar--showSideBar' : ''}`}>
             <div className={'sideBar__nav'}>
-                <Link to={LINKS.BOARD_LINK}><NavItem active={pathname.includes(LINKS.BOARD_LINK)}>Производная</NavItem></Link>
-                <Link to={'/'}><NavItem active={pathname.includes(LINKS.INTEGRAL_LINK)}>Интегралл</NavItem></Link>
+                <Link to={LINKS.BOARD_LINK}><NavItem active={pathname.includes(LINKS.BOARD_LINK)}>Derivative </NavItem></Link>
+                <Link to={LINKS.DERIVATIVE_LINK}><NavItem active={pathname.includes(LINKS.DERIVATIVE_LINK)}>Derivative Generating</NavItem></Link>
+                <Link to={'/'}><NavItem active={pathname.includes(LINKS.INTEGRAL_LINK)}>Integral</NavItem></Link>
             </div>
         </div>
 
