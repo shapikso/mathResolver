@@ -14,7 +14,9 @@ const config = { };
 const math = create(all, config);
 
 type TProps = {
-    mainExpression: {main: string, mathjax: string, functionDomain: [number, number]},
+    mainExpression: {main: string, mathjax: string,
+    //    functionDomain: [number, number]
+    },
 };
 
 const Integrate = ({mainExpression}: TProps) => {
@@ -24,13 +26,13 @@ const Integrate = ({mainExpression}: TProps) => {
 
     const mainTest = '1/sqrt(x)';
 
-    const [startPoint, endPoint] = mainExpression.functionDomain;
-    const startOFRange = +( startPoint === (-Infinity) ? 0 : (startPoint + 1)).toFixed();
-    const endRangeForResult = (startOFRange + 1) < Infinity ? startOFRange + 1 : endPoint;
+    //const [startPoint, endPoint] = mainExpression.functionDomain;
+    //const startOFRange = +( startPoint === (-Infinity) ? 0 : (startPoint + 1)).toFixed();
+    // endRangeForResult = (startOFRange + 1) < Infinity ? startOFRange + 1 : endPoint;
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => setResult(e.target.value);
     const handleClick = () => {
-        const isResult = isResultRight(mainExpression.main, convertToUaFormulas(result), startOFRange,endRangeForResult);
+        const isResult = isResultRight(mainExpression.main, convertToUaFormulas(result), 1,2);
         toast.success(isResult ? 'ваш ответ правильный' : 'ваш ответ не правильный');
     };
 

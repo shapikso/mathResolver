@@ -11,8 +11,8 @@ export const randomInteger = (min: number, max: number, withZero = false): numbe
     return !withZero && result === 0 ? randomInteger(min,max) : result;
 };
 
-export const randomIntegerExclude = (min: number, max: number, excludedNumber: number): number => {
+export const randomIntegerExclude = (min: number, max: number, excludedNumber: number[]): number => {
     let rand = min - 0.5 + Math.random() * (max - min + 1);
     const result = Math.round(rand);
-    return result === excludedNumber ? randomIntegerExclude(min,max, excludedNumber) : result;
+    return excludedNumber.includes(result) ? randomIntegerExclude(min,max, excludedNumber) : result;
 };
