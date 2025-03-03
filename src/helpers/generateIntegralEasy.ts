@@ -13,8 +13,6 @@ export type DomainType = {
 }
 
 class Expression {
-    p = [2,3,'e',10];
-    pow = [2,3,4];
     functionValueFirst : number;
     functionValueSecond : number;
     functionValueThird : number;
@@ -126,7 +124,7 @@ class Expression {
         2: `\\frac{x^{${this.functionSecondPow - 1}}}{x^${this.functionSecondPow}+${this.functionSecondValue}}`,
         3: `\\frac{x^{${this.functionThirdPow - 1}}}{\\sqrt{x^${this.functionThirdPow}+${this.functionThirdValue}}}`,
         4: `\\frac{${this.functionFourthValueFirst}}{(x+${this.functionFourthValueSecond})^${this.functionFourthPow}}`,
-        5: `${this.functionFifthValueFirst}*e^{${this.functionFifthValueSecond}x+${this.functionFifthValueThird}}`,
+        5: `${this.functionFifthValueFirst}e^{${this.functionFifthValueSecond}x+${this.functionFifthValueThird}}`,
         6: `${this.functionSixthValueFirst}xe^{${this.functionSixthValueSecond}x}`,
         7: `${this.functionSeventhValueFirst}x^{${this.functionSeventhPow - 1}}e^{x^${this.functionSeventhPow}+${this.functionSeventhValueThird}}`,
         8: `${this.getGeometricNormal[this.functionEightGeometricType]}${ this.functionEightValuePow !== 1 ? `^${this.functionEightValuePow}` : ''}(${this.functionEightValue}x)`,
