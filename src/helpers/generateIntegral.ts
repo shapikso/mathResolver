@@ -76,7 +76,7 @@ class Expression {
         this.functionSecondValueThird = randomInteger(2,5);
 
         this.functionThirdValueFirst = randomInteger(2,5);
-        this.functionThirdValueSecond = randomIntegerExclude(2,5, this.functionThirdValueFirst);
+        this.functionThirdValueSecond = randomIntegerExclude(2,5, [this.functionThirdValueFirst]);
         this.functionThirdRandom = randomInteger(0,1, true);
 
         this.functionFourthPow = randomInteger(2,6);

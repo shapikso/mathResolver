@@ -109,14 +109,14 @@ class Expression {
     }
 
     getExpression = (): GeometricType  => ({
-        1: `${this.functionValueFirst}*x^${this.functionFirstPowFirst} + ${this.functionValueSecond}*x^${this.functionFirstPowSecond} ${this.functionValueThird}*x^${this.functionFirstPowThird}`,
+        1: `${this.functionValueFirst}*x^${this.functionFirstPowFirst} + ${this.functionValueSecond}*x^${this.functionFirstPowSecond} + ${this.functionValueThird}*x^${this.functionFirstPowThird}`,
         2: `x^${this.functionSecondPow - 1}/(x^${this.functionSecondPow} + ${this.functionSecondValue})`,
         3: `x^${this.functionThirdPow - 1}/sqrt(x^${this.functionThirdPow} + ${this.functionThirdValue})`,
         4: `${this.functionFourthValueFirst}/(x + ${this.functionFourthValueSecond})^${this.functionFourthPow}`,
         5: `${this.functionFifthValueFirst}*e^(${this.functionFifthValueSecond}*x + ${this.functionFifthValueThird})`,
-        6: `${this.functionSixthValueFirst}*x*e^(${this.functionSixthValueSecond}*x)`,
-        7: `${this.functionSeventhValueFirst}*x^${this.functionSeventhPow - 1}e^(x^${this.functionSeventhPow}+${this.functionSeventhValueThird})`,
-        8: `${this.getGeometricType[this.functionEightGeometricType]}^${this.functionEightValuePow}(${this.functionEightValue}*x)`,
+        //6: `${this.functionSixthValueFirst}*x*e^(${this.functionSixthValueSecond}*x)`,
+        // 6: `${this.functionSeventhValueFirst}*x^${this.functionSeventhPow - 1}e^(x^${this.functionSeventhPow}+${this.functionSeventhValueThird})`,
+        6: `(${this.getGeometricType[this.functionEightGeometricType]}(${this.functionEightValue}*x))^${this.functionEightValuePow}`,
     });
     //
     getExpressionForMathjax = (): GeometricType  => ({
@@ -125,9 +125,9 @@ class Expression {
         3: `\\frac{x^{${this.functionThirdPow - 1}}}{\\sqrt{x^${this.functionThirdPow}+${this.functionThirdValue}}}`,
         4: `\\frac{${this.functionFourthValueFirst}}{(x+${this.functionFourthValueSecond})^${this.functionFourthPow}}`,
         5: `${this.functionFifthValueFirst}e^{${this.functionFifthValueSecond}x+${this.functionFifthValueThird}}`,
-        6: `${this.functionSixthValueFirst}xe^{${this.functionSixthValueSecond}x}`,
-        7: `${this.functionSeventhValueFirst}x^{${this.functionSeventhPow - 1}}e^{x^${this.functionSeventhPow}+${this.functionSeventhValueThird}}`,
-        8: `${this.getGeometricNormal[this.functionEightGeometricType]}${ this.functionEightValuePow !== 1 ? `^${this.functionEightValuePow}` : ''}(${this.functionEightValue}x)`,
+        //6: `${this.functionSixthValueFirst}xe^{${this.functionSixthValueSecond}x}`,
+        // 6: `${this.functionSeventhValueFirst}x^{${this.functionSeventhPow - 1}}e^{x^${this.functionSeventhPow}+${this.functionSeventhValueThird}}`,
+        6: `${this.getGeometricNormal[this.functionEightGeometricType]}${ this.functionEightValuePow !== 1 ? `^${this.functionEightValuePow}` : ''}(${this.functionEightValue}x)`,
     });
 
     // getExpression = (): GeometricType  => ({
@@ -173,8 +173,8 @@ class Expression {
 
 export const generateExpression = (): { mathjax: string; main: string; } => {
     const expression = new Expression();
-    const A1 = randomInteger(1,8);
-    const A2 = randomInteger(1,8);
+    const A1 = randomInteger(1,6);
+    const A2 = randomInteger(1,6);
     return A1 === A2 ? generateExpression() : {
         main :`${expression.getExpression()[A1]}+${expression.getExpression()[A2]}`.replaceAll('+-','-'),
         mathjax: `\\int_a^b${expression.getExpressionForMathjax()[A1]}+${expression.getExpressionForMathjax()[A2]}`.replaceAll('+-','-').replaceAll('1x','x').replaceAll('1e','e').replaceAll('x^{1}','x')
