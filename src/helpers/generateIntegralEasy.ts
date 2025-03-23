@@ -74,10 +74,10 @@ class Expression {
     };
 
     constructor() {
-        this.functionValueFirst = randomInteger(-6, 6);
-        this.functionValueSecond = randomInteger(-5, 4);
-        this.functionValueThird = randomInteger(-7, 7);
-        this.functionFirstPowFirst = randomInteger(-6, 6);
+        this.functionValueFirst = randomInteger(-5, 5);
+        this.functionValueSecond = randomInteger(-5, 5);
+        this.functionValueThird = randomInteger(-5, 5);
+        this.functionFirstPowFirst = randomInteger(-3, 3);
         this.functionFirstPowSecond = randomIntegerExclude(-5, 5,[this.functionFirstPowFirst, 0]);
         this.functionFirstPowThird = randomIntegerExclude(-4, 4, [this.functionFirstPowFirst, this.functionFirstPowSecond, 0]);
 
@@ -177,6 +177,6 @@ export const generateExpression = (): { mathjax: string; main: string; } => {
     const A2 = randomInteger(1,6);
     return A1 === A2 ? generateExpression() : {
         main :`${expression.getExpression()[A1]}+${expression.getExpression()[A2]}`.replaceAll('+-','-'),
-        mathjax: `\\int_a^b${expression.getExpressionForMathjax()[A1]}+${expression.getExpressionForMathjax()[A2]}`.replaceAll('+-','-').replaceAll('1x','x').replaceAll('1e','e').replaceAll('x^{1}','x')
+        mathjax: `\\int_a^b${expression.getExpressionForMathjax()[1]}+${expression.getExpressionForMathjax()[2]}`.replaceAll('+-','-').replaceAll('1x','x').replaceAll('1e','e').replaceAll('x^{1}','x')
     };
 };

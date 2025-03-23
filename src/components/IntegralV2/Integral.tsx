@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-//import {generateExpression} from "../../helpers/generateIntegralEasy";
-import {generateExpression} from "../../helpers/generateIntegral";
+import {generateExpression} from "../../helpers/generateIntegralEasy";
+//import {generateExpression} from "../../helpers/generateIntegral";
 import Title from "../common/Title/Title";
 import Integrate from "./Integrate";
 
-const Integral = () => {
+const IntegralV2 = () => {
     const navigate = useNavigate();
     const mainExpression = generateExpression();
     console.log(mainExpression);
@@ -22,9 +22,9 @@ const Integral = () => {
                     Integral
                 </Title>
             </div>
-            <Integrate mainExpression={mainExpression}/>
+            <Integrate key={mainExpression.main} mainExpression={mainExpression}/>
         </div>
     );
 };
 
-export default Integral;
+export default IntegralV2;
