@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {generateExpression} from "../../helpers/generateIntegralEasy";
-//import {generateExpression} from "../../helpers/generateIntegral";
 import Title from "../common/Title/Title";
 import Integrate from "./Integrate";
 

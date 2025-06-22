@@ -177,6 +177,6 @@ export const generateExpression = (): { mathjax: string; main: string; } => {
     const A2 = randomInteger(1,6);
     return A1 === A2 ? generateExpression() : {
         main :`${expression.getExpression()[A1]}+${expression.getExpression()[A2]}`.replaceAll('+-','-'),
-        mathjax: `\\int_a^b${expression.getExpressionForMathjax()[1]}+${expression.getExpressionForMathjax()[2]}`.replaceAll('+-','-').replaceAll('1x','x').replaceAll('1e','e').replaceAll('x^{1}','x')
+        mathjax: `\\int_a^b${expression.getExpressionForMathjax()[A1]}+${expression.getExpressionForMathjax()[A2]}`.replaceAll('+-','-').replaceAll('1x','x').replaceAll('1e','e').replaceAll('x^{1}','x')
     };
 };

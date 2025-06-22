@@ -29,7 +29,7 @@ const calculatorPresets = [
     },
     {
         text: '\\ln{x}',
-        value: 'ln(x)',
+        value: 'log(x)',
     },
     {
         text: '\\log_{10}{x}',

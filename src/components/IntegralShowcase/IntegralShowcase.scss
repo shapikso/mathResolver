@@ -1,0 +1,19 @@
+@import 'src/styles/colors';
+
+.showcase {
+  display: flex;
+  flex-direction: column;
+  row-gap: 80px;
+  margin-top: 80px;
+  &__item {
+    display: flex;
+    gap: 80px;
+
+    &__right {
+      display: flex;
+      flex-shrink: 0;
+      flex-direction: column;
+      row-gap: 20px;
+    }
+  }
+}

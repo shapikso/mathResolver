@@ -143,7 +143,7 @@ export const generateExpression = (): { mathjax: string; main: string; functionD
     console.log(A1);
     return {
         main :`${expression.getExpression()[A1]}`.replaceAll('+-','-'),
-        mathjax: `\\int_a^b${expression.getExpressionForMathjax()[A1]},dx`.replaceAll('+-','-'),
+        mathjax: `\\int${expression.getExpressionForMathjax()[A1]},dx`.replaceAll('+-','-'),
         functionDomain: expression.generateFunctionDomain()[A1],
     };
 };

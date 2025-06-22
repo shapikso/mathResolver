@@ -4,5 +4,6 @@ export default {
     BOARD_LINK: '/board',
     DERIVATIVE_LINK: '/derivative',
     CREATE_LINK: '/create',
-    INTEGRAL_LINK: '/integral'
+    INTEGRAL_LINK: '/integral',
+    INTEGRAL_SHOWCASE_LINK: '/showcase-integral'
 };

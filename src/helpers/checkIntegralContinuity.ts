@@ -20,7 +20,8 @@ function numericalIntegral(f: MathFunction, a: number, b: number, n: number = 10
 
 // Функция для проверки разрывов (например, деление на ноль)
 function hasDiscontinuity(f: MathFunction, a: number, b: number, step: number = 0.01, threshold: number = 1e6): boolean {
-    for (let x = a; x <= b; x += step) {
+
+    for (let x = a; x <= b; x = +(x + step).toFixed(4)) {
         try {
             let y = f(x);
             if (!isFinite(y) || Math.abs(y) > threshold) { // Если значение слишком большое, считаем это разрывом
@@ -36,7 +37,6 @@ function hasDiscontinuity(f: MathFunction, a: number, b: number, step: number = 
 // Основная функция для проверки непрерывности интеграла
 export function checkIntegralContinuity(funcStr: string, a: number, b: number): boolean {
     const f = math.compile(funcStr);
-
     // Проверка на разрывы в функции
     if (hasDiscontinuity((x) => f.evaluate({ x }), a, b)) {
         return false;

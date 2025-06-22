@@ -18,9 +18,10 @@ type TProps = {
     mainExpression: {main: string, mathjax: string,
     //    functionDomain: [number, number]
     },
+    hiddenCalculator?: boolean,
 };
 
-const Integrate = ({mainExpression}: TProps) => {
+const Integrate = ({mainExpression, hiddenCalculator=false}: TProps) => {
     const [result, setResult] = useState('2sqrt(x)');
     const [mathJaxResult, setMathJaxResult] = useState('2sqrt(x)');
     const inputRef = useRef<HTMLInputElement>(null);
@@ -36,10 +37,8 @@ const Integrate = ({mainExpression}: TProps) => {
     // endRangeForResult = (startOFRange + 1) < Infinity ? startOFRange + 1 : endPoint;
 
     useEffect(() => {
-        console.log('range');
         if ( minRange === 1 && maxRange === 2) return;
-        console.log('setting');
-        setRange([1,2]);
+        setRange([3,4]);
     },[mainExpression]);
 
     useEffect(() => {
@@ -52,9 +51,8 @@ const Integrate = ({mainExpression}: TProps) => {
 
     useEffect(() => {
         if (failureCount < 25) return;
-        console.log('here to much tryes');
         setFailureCount(0);
-        setRange([1,2]);
+        setRange([3,4]);
         setValueAdd(-1);
     },[failureCount]);
 
@@ -63,9 +61,6 @@ const Integrate = ({mainExpression}: TProps) => {
         const isResult = isResultRight(mainExpression.main, convertToUaFormulas(result), minRange,maxRange);
         toast.success(isResult ? 'ваш ответ правильный' : 'ваш ответ не правильный');
     };
-
-
-
 
     const insertTextAtCursor = (text: string) => {
         if (!inputRef) return;
@@ -105,7 +100,7 @@ const Integrate = ({mainExpression}: TProps) => {
             <Input ref={inputRef} value={result} size={inputSize.large} onChange={handleChange}/>
             <Button size={buttonSize.large} onClick={handleClick}>Submit</Button>
             <div className="derivativeWrapper__derivativeExpression"><MathComponent tex={mathJaxResult} /></div>
-            <Calculator setValue={insertTextAtCursor}/>
+            {!hiddenCalculator && <Calculator setValue={insertTextAtCursor}/>}
         </div>
     );
 };
